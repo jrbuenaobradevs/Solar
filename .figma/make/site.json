@@ -1,0 +1,10 @@
+{
+  "description": "Helps Filipino homeowners and businesses explore solar options, estimate energy needs, compare packages, and request custom installation quotes easily.",
+  "robots": {
+    "index": false
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}
