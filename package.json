@@ -7,11 +7,14 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "format": "oxfmt"
+    "format": "oxfmt",
+    "test": "vitest run"
   },
+  "packageManager": "pnpm@10.34.3",
   "dependencies": {
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "react-router-dom": "^7.9.4"
   },
   "devDependencies": {
     "@types/node": "^22.0.0",
@@ -22,6 +25,7 @@
     "@tailwindcss/vite": "^4.0.0",
     "oxfmt": "^0.2.0",
     "typescript": "^5.7.0",
-    "vite": "^8.0.5"
+    "vite": "^8.0.5",
+    "vitest": "^3.2.4"
   }
 }

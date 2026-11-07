@@ -1,5 +1,6 @@
 {
-  "description": "Helps Filipino homeowners and businesses explore solar options, estimate energy needs, compare packages, and request custom installation quotes easily.",
+  "title": "Solar Mechanics",
+  "description": "Solar Mechanics helps homeowners and businesses in the Philippines estimate solar energy needs, compare system types, and request a technical quotation.",
   "robots": {
     "index": false
   },
