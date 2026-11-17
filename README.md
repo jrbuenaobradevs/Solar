@@ -1,6 +1,6 @@
 # Solar Mechanics
 
-Public website for Solar Mechanics (presented in association with EEC Builders Corp.): solar supply and installation, a load-based calculator, and informational pages for planned electrical services and solar training.
+Public website for Solar Mechanics: solar supply and installation, a load-based calculator, and informational pages for planned electrical services and solar training.
 
 ## Local development
 
@@ -31,4 +31,3 @@ There is no backend. Quote requests are stored in the browser (`sessionStorage`)
 - Verified phone, email, and service area
 - Approved package prices (or set `showIllustrativePricing` to `false`)
 - Real project photos and company credentials
-- Legal confirmation of the EEC Builders Corp. relationship

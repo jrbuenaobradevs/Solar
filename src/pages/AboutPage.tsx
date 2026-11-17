@@ -9,7 +9,7 @@ function AboutPage() {
       <PageHero
         kicker="About Solar Mechanics"
         title="Solar energy, electrical services, and practical training."
-        text="Solar Mechanics is presented in association with EEC Builders Corp. This page does not claim that Solar Mechanics is a separate registered corporation or a legal subsidiary."
+        text="Solar Mechanics helps properties plan solar power, explore planned electrical services, and learn about practical solar training."
       />
       <section className="section">
         <div className="shell about-grid">

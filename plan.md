@@ -4,8 +4,6 @@
 
 Update the existing Solar All website codebase into **Solar Mechanics**, a professional solar energy, electrical services, and solar training website for the Philippine market.
 
-The website will be associated with EEC Builders Corp. if the existing project already establishes that relationship.
-
 The initial release must focus on solar supply and installation, including an interactive solar energy calculator that allows customers to estimate their solar requirements and submit a quotation request.
 
 Electrical Services and Solar Training Center must have presentable informational pages with planned services, but their operational features will be implemented in future development phases.
@@ -452,7 +450,7 @@ Create a concise company introduction that positions Solar Mechanics around:
 - Electrical services.
 - Renewable-energy education.
 
-Use verified existing company information wherever available. Do not assume Solar Mechanics is legally a separate corporation or a registered subsidiary of EEC Builders Corp.
+Use verified existing company information wherever available. Do not invent legal structure, certifications, or company history.
 
 ### Contact
 

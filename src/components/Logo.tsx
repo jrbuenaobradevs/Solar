@@ -6,7 +6,7 @@ function Logo({ inverse = false }: { inverse?: boolean }) {
       <img className="brand-mark" src="/solar-mechanics.png" alt="" />
       <span>
         <strong>SOLAR MECHANICS</strong>
-        <small>EEC BUILDERS CORP.</small>
+        <small>SOLAR · ELECTRICAL · TRAINING</small>
       </span>
     </Link>
   );

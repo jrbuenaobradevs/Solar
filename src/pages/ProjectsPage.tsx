@@ -16,7 +16,7 @@ function ProjectsPage() {
       <PageHero
         kicker="Projects"
         title="Representative solar installations."
-        text="Photos are stock imagery used for layout. They are not verified Solar Mechanics or EEC project records and must be replaced with approved assets."
+        text="Photos are stock imagery used for layout. They are not verified Solar Mechanics project records and must be replaced with approved assets."
       />
       <section className="section">
         <div className="shell">

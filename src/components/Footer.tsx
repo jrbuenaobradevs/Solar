@@ -9,8 +9,8 @@ function Footer() {
           <Logo inverse />
           <p>
             Solar Mechanics provides solar supply and installation planning for homes and businesses
-            in the Philippines, presented in association with EEC Builders Corp. Electrical services
-            and training programs are listed as planned offerings.
+            in the Philippines. Electrical services and training programs are listed as planned
+            offerings.
           </p>
         </div>
         <div>
@@ -38,7 +38,7 @@ function Footer() {
         </div>
       </div>
       <div className="shell footer-bottom">
-        <span>© {new Date().getFullYear()} Solar Mechanics. Associated with EEC Builders Corp.</span>
+        <span>© {new Date().getFullYear()} Solar Mechanics.</span>
         <span>Privacy · Terms · Accessibility</span>
       </div>
     </footer>
