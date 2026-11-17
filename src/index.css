@@ -112,6 +112,10 @@ p { line-height: 1.7; }
 .card-actions .btn { min-height: 42px; padding: 0 10px; font-size: 11px; }
 .compare-check { margin-top: 14px; display: flex; align-items: center; gap: 7px; color: var(--slate); font-size: 11px; cursor: pointer; }
 .compare-check input { accent-color: var(--indigo); }
+.addon-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; align-items: stretch; }
+.addon-spec { color: var(--navy); font-size: 12px; font-weight: 600; margin: 20px 0 8px; line-height: 1.55; }
+.addon-copy { color: var(--slate); font-size: 13px; margin: 0 0 20px; }
+.addon-actions { grid-template-columns: 1fr; }
 
 .steps-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; counter-reset: steps; }
 .steps-grid article { padding: 25px 25px 25px 0; border-top: 2px solid var(--border); position: relative; }
@@ -354,6 +358,7 @@ footer { background: #101a2f; color: var(--white); padding: 60px 0 25px; }
   .nav nav a { padding-inline: 5px; font-size: 10px; }
   .four-grid { grid-template-columns: 1fr 1fr; }
   .package-grid { grid-template-columns: 1fr 1fr; }
+  .addon-grid { grid-template-columns: 1fr 1fr; }
   .package-card:last-child:nth-child(odd) { grid-column: span 2; }
   .admin-stats { grid-template-columns: repeat(3, 1fr); }
 }
@@ -391,7 +396,7 @@ footer { background: #101a2f; color: var(--white); padding: 60px 0 25px; }
   .hero-media { height: 330px; }
   .benefit-strip { align-items: flex-start; flex-direction: column; gap: 11px; }
   .section { padding: 68px 0; }
-  .four-grid, .three-grid, .package-grid, .project-grid, .testimonials, .about-grid, .contact-grid { grid-template-columns: 1fr; }
+  .four-grid, .three-grid, .package-grid, .addon-grid, .project-grid, .testimonials, .about-grid, .contact-grid { grid-template-columns: 1fr; }
   .package-card:last-child:nth-child(odd) { grid-column: auto; }
   .steps-grid { grid-template-columns: 1fr; }
   .footer-grid { grid-template-columns: 1fr; }

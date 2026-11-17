@@ -4,6 +4,7 @@ import ContactCTA from "../components/ContactCTA";
 import FAQSection from "../components/FAQSection";
 import Icon from "../components/Icon";
 import PageHero from "../components/PageHero";
+import SectionTitle from "../components/SectionTitle";
 import SolarPackageCard from "../components/SolarPackageCard";
 import { solarCalibration } from "../config/solarCalibration";
 import { solarFaqs } from "../data/faqs";
@@ -142,6 +143,49 @@ function SolarSolutionsPage() {
           </section>
         </div>
       )}
+
+      <section className="section compact soft-section">
+        <div className="shell">
+          <SectionTitle
+            kicker="Optional extras"
+            title="Add-ons and upgrades"
+            text="Extend storage or generation on a compatible system. Brand, capacity, and installed price are confirmed during technical assessment."
+          />
+          <div className="addon-grid">
+            {solarCalibration.addons.map((addon) => (
+              <article className="package-card" key={addon.id}>
+                <div className="package-head">
+                  <span className="icon-box"><Icon name={addon.icon} /></span>
+                  <div>
+                    <small>Add-on</small>
+                    <h3>{addon.name}</h3>
+                  </div>
+                </div>
+                <p className="addon-spec">{addon.spec}</p>
+                <p className="addon-copy">{addon.description}</p>
+                <div className="price-block">
+                  {solarCalibration.showIllustrativePricing ? (
+                    <>
+                      <small>{addon.priceIsFrom ? "From" : "Illustrative price"}</small>
+                      <strong>{peso(addon.price)}</strong>
+                      <em>Not an official quotation</em>
+                    </>
+                  ) : (
+                    <>
+                      <small>Pricing</small>
+                      <strong>Request a Quote</strong>
+                      <em>Price confirmed after assessment</em>
+                    </>
+                  )}
+                </div>
+                <div className="card-actions addon-actions">
+                  <Button to="/quote">Request this add-on</Button>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
 
       <FAQSection items={solarFaqs} />
       <ContactCTA />
