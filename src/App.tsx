@@ -9,10 +9,12 @@ import QuotePage from "./pages/QuotePage";
 import SolarCalculatorPage from "./pages/SolarCalculatorPage";
 import SolarSolutionsPage from "./pages/SolarSolutionsPage";
 import TrainingCenterPage from "./pages/TrainingCenterPage";
+import AdminPage from "./pages/AdminPage";
 
 export default function App() {
   return (
     <Routes>
+      <Route path="/admin" element={<AdminPage />} />
       <Route element={<Layout />}>
         <Route path="/" element={<HomePage />} />
         <Route path="/solar-solutions" element={<SolarSolutionsPage />} />

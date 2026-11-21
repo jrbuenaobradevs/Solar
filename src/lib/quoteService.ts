@@ -1,4 +1,5 @@
 import type { QuoteDraft } from "./quoteDraft";
+import { recordInquiry } from "./cms";
 
 export type QuoteSubmission = QuoteDraft & {
   name: string;
@@ -9,37 +10,33 @@ export type QuoteSubmission = QuoteDraft & {
 };
 
 export type QuoteResult =
-  | { ok: true; reference: string; persisted: false }
+  | { ok: true; reference: string }
   | { ok: false; error: string };
 
-const STORE = "solar-mechanics-quotes-local";
-
 /**
- * Development-only mock. Quotes are stored in this browser's sessionStorage
- * and are NOT sent to a server, emailed, or saved in a database.
+ * Submits a quote request to Supabase.
  */
 export async function submitQuote(payload: QuoteSubmission): Promise<QuoteResult> {
-  await new Promise((resolve) => setTimeout(resolve, 400));
-
   if (!payload.name.trim() || !payload.email.trim() || !payload.phone.trim()) {
     return { ok: false, error: "Name, email, and contact number are required." };
   }
 
   const reference = `SM-${Date.now().toString().slice(-8)}`;
-  const record = {
-    reference,
-    status: "Pending Review",
-    submittedAt: new Date().toISOString(),
-    payload,
-  };
+  const message = `Address: ${payload.address || "Not provided"}\n${payload.extraNotes || ""}\nEstimate: ${payload.estimate.dailyKwh.toFixed(1)} kWh/day, ${payload.estimate.solarKwp} kWp ${payload.estimate.recommendedType}.`;
 
   try {
-    const existing = JSON.parse(sessionStorage.getItem(STORE) || "[]") as unknown[];
-    existing.push(record);
-    sessionStorage.setItem(STORE, JSON.stringify(existing));
-  } catch {
-    return { ok: false, error: "Could not save this request in the browser. Try again." };
+    await recordInquiry({
+      inquiry_type: "quote",
+      full_name: payload.name.trim(),
+      email: payload.email.trim(),
+      phone: payload.phone.trim(),
+      subject: "Solar quote request",
+      message,
+    });
+  } catch (err) {
+    console.error("Failed to submit quote:", err);
+    return { ok: false, error: "Could not save this request. Please try again." };
   }
 
-  return { ok: true, reference, persisted: false };
+  return { ok: true, reference };
 }

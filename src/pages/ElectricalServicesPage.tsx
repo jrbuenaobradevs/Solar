@@ -1,15 +1,26 @@
+import { useEffect, useState } from "react";
 import Button from "../components/Button";
 import PageHero from "../components/PageHero";
 import ServiceCard from "../components/ServiceCard";
 import { electricalServices } from "../data/electricalServices";
+import { getCmsPages, type CmsPage } from "../lib/cms";
 
 function ElectricalServicesPage() {
+  const [cms, setCms] = useState<CmsPage | null>(null);
+
+  useEffect(() => {
+    getCmsPages().then(pages => {
+      const electricalPage = pages.find(p => p.id === 'electrical-services');
+      if (electricalPage) setCms(electricalPage);
+    });
+  }, []);
+
   return (
     <div className="page">
       <PageHero
         kicker="Electrical Services"
-        title="Planned electrical supply and installation support."
-        text="This page introduces future electrical service categories. It is not a booking, ordering, or work-order system. Availability of regulated electrical work is subject to confirmation."
+        title={cms?.title ?? "Planned electrical supply and installation support."}
+        text={cms?.description ?? "This page introduces future electrical service categories. It is not a booking, ordering, or work-order system. Availability of regulated electrical work is subject to confirmation."}
       />
       <section className="section">
         <div className="shell">

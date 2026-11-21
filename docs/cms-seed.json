@@ -1,0 +1,25 @@
+{
+  "pages": [
+    { "id": "home", "path": "/", "title": "Powering a Cleaner, Brighter Tomorrow." },
+    { "id": "solar-solutions", "path": "/solar-solutions", "title": "Supply, installation, and a practical energy calculator." },
+    { "id": "solar-calculator", "path": "/solar-calculator", "title": "Estimate your energy use, then request a quotation." },
+    { "id": "quote", "path": "/quote", "title": "Send your estimate for technical review." },
+    { "id": "electrical-services", "path": "/electrical-services", "title": "Planned electrical supply and installation support." },
+    { "id": "training-center", "path": "/training-center", "title": "Proposed courses in solar knowledge and installation skills." },
+    { "id": "about", "path": "/about", "title": "Solar energy, electrical services, and practical training." },
+    { "id": "contact", "path": "/contact", "title": "Tell us about your property and energy goals." },
+    { "id": "projects", "path": "/projects", "title": "Representative solar installations." }
+  ],
+  "settings": {
+    "companyName": "Solar Mechanics",
+    "description": "Solar supply and installation planning for homes and businesses in the Philippines.",
+    "address": "Metro Manila, Philippines",
+    "phone": "+63 917 000 0000",
+    "email": "hello@solarmechanics.example",
+    "hours": "To be confirmed",
+    "facebook": "",
+    "instagram": "",
+    "linkedin": ""
+  },
+  "inquiries": []
+}

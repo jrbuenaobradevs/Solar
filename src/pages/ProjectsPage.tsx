@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import PageHero from "../components/PageHero";
 import { images } from "../data/images";
+import { getCmsPages, type CmsPage } from "../lib/cms";
 
 const data = [
   ["Residential", "5.5 kWp Hybrid", "Representative site", images.home],
@@ -10,13 +11,22 @@ const data = [
 ] as const;
 
 function ProjectsPage() {
+  const [cms, setCms] = useState<CmsPage | null>(null);
   const [filter, setFilter] = useState("All");
+
+  useEffect(() => {
+    getCmsPages().then(pages => {
+      const projectsPage = pages.find(p => p.id === 'projects');
+      if (projectsPage) setCms(projectsPage);
+    });
+  }, []);
+
   return (
     <div className="page">
       <PageHero
         kicker="Projects"
-        title="Representative solar installations."
-        text="Photos are stock imagery used for layout. They are not verified Solar Mechanics project records and must be replaced with approved assets."
+        title={cms?.title ?? "Representative solar installations."}
+        text={cms?.description ?? "Photos are stock imagery used for layout. They are not verified Solar Mechanics project records and must be replaced with approved assets."}
       />
       <section className="section">
         <div className="shell">

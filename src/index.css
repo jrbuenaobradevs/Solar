@@ -430,6 +430,19 @@ footer { background: #101a2f; color: var(--white); padding: 60px 0 25px; }
   .product-list { min-width: 600px; }
 }
 
+@media (max-width: 760px) {
+  .cms-layout { display: block !important; }
+  .cms-layout > aside { position: sticky; top: 0; z-index: 20; padding: 12px !important; }
+  .cms-layout > aside > small, .cms-layout > aside > div:last-of-type, .cms-layout > aside > a { display: none; }
+  .cms-layout > aside nav { display: flex; }
+  .cms-layout > aside button { padding: 9px 10px !important; white-space: nowrap; font-size: 12px; }
+  .cms-layout > main { padding: 20px 14px !important; }
+  .cms-cards { grid-template-columns: 1fr !important; }
+  .cms-editor { grid-template-columns: 1fr !important; }
+  .cms-editor > nav { display: flex !important; overflow-x: auto; }
+  .cms-editor > nav button { min-width: 180px; }
+}
+
 @media print {
   .site-header, footer, .progress, .step-actions, .final-cta, .menu { display: none !important; }
   .live-summary { color: var(--navy); background: var(--white); border: 1px solid var(--border); }

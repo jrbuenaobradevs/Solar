@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Button from "../components/Button";
 import ContactCTA from "../components/ContactCTA";
 import FAQSection from "../components/FAQSection";
@@ -9,15 +9,30 @@ import SolarPackageCard from "../components/SolarPackageCard";
 import { solarCalibration } from "../config/solarCalibration";
 import { solarFaqs } from "../data/faqs";
 import { peso } from "../lib/format";
+import { getCmsPages, getSolarPackages, getSolarAddons, type CmsPage, type SolarPackage, type SolarAddon } from "../lib/cms";
 
 function SolarSolutionsPage() {
-  const packages = solarCalibration.packages;
+  const [cms, setCms] = useState<CmsPage | null>(null);
+  const [packages, setPackages] = useState<SolarPackage[]>([]);
+  const [addons, setAddons] = useState<SolarAddon[]>([]);
+  const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
   const [type, setType] = useState("All");
   const [audience, setAudience] = useState("All");
   const [sort, setSort] = useState("capacity");
   const [compare, setCompare] = useState<string[]>([]);
   const [detail, setDetail] = useState<string | null>(null);
+
+  useEffect(() => {
+    Promise.all([
+      getCmsPages().then(pages => {
+        const solarPage = pages.find(p => p.id === 'solar-solutions');
+        if (solarPage) setCms(solarPage);
+      }),
+      getSolarPackages().then(pkgs => setPackages(pkgs)),
+      getSolarAddons().then(adns => setAddons(adns))
+    ]).finally(() => setLoading(false));
+  }, []);
 
   const shown = useMemo(() => {
     return packages
@@ -34,8 +49,8 @@ function SolarSolutionsPage() {
     <div className="page">
       <PageHero
         kicker="Solar Solutions"
-        title="Supply, installation, and a practical energy calculator."
-        text="Compare hybrid, on-grid, and off-grid configurations, then estimate your loads. Catalog prices are placeholders until a site assessment produces a formal quotation."
+        title={cms?.title ?? "Supply, installation, and a practical energy calculator."}
+        text={cms?.description ?? "Compare hybrid, on-grid, and off-grid configurations, then estimate your loads. Catalog prices are placeholders until a site assessment produces a formal quotation."}
       />
 
       <section className="section compact">
@@ -152,17 +167,17 @@ function SolarSolutionsPage() {
             text="Extend storage or generation on a compatible system. Brand, capacity, and installed price are confirmed during technical assessment."
           />
           <div className="addon-grid">
-            {solarCalibration.addons.map((addon) => (
+            {addons.map((addon) => (
               <article className="package-card" key={addon.id}>
                 <div className="package-head">
-                  <span className="icon-box"><Icon name={addon.icon} /></span>
+                  <span className="icon-box"><Icon name={addon.icon || "battery"} /></span>
                   <div>
                     <small>Add-on</small>
                     <h3>{addon.name}</h3>
                   </div>
                 </div>
                 <p className="addon-spec">{addon.spec}</p>
-                <p className="addon-copy">{addon.description}</p>
+                <p className="addon-copy">{addon.description || ""}</p>
                 <div className="price-block">
                   {solarCalibration.showIllustrativePricing ? (
                     <>

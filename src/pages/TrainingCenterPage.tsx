@@ -1,15 +1,26 @@
+import { useEffect, useState } from "react";
 import Button from "../components/Button";
 import PageHero from "../components/PageHero";
 import ServiceStatusBadge from "../components/ServiceStatusBadge";
 import { trainingCourses } from "../data/trainingCourses";
+import { getCmsPages, type CmsPage } from "../lib/cms";
 
 function TrainingCenterPage() {
+  const [cms, setCms] = useState<CmsPage | null>(null);
+
+  useEffect(() => {
+    getCmsPages().then(pages => {
+      const trainingPage = pages.find(p => p.id === 'training-center');
+      if (trainingPage) setCms(trainingPage);
+    });
+  }, []);
+
   return (
     <div className="page">
       <PageHero
         kicker="Solar Training Center"
-        title="Proposed courses in solar knowledge and installation skills."
-        text="These topics are planned. This page is not a learning management system. No schedules, fees, duration, accreditation, or enrollment seats are published here."
+        title={cms?.title ?? "Proposed courses in solar knowledge and installation skills."}
+        text={cms?.description ?? "These topics are planned. This page is not a learning management system. No schedules, fees, duration, accreditation, or enrollment seats are published here."}
       />
       <section className="section">
         <div className="shell">

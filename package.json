@@ -12,6 +12,7 @@
   },
   "packageManager": "pnpm@10.34.3",
   "dependencies": {
+    "@supabase/supabase-js": "^2.45.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-router-dom": "^7.9.4"

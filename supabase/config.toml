@@ -1,0 +1,13 @@
+# Supabase CLI configuration for Solar Mechanics project
+
+[project_reference]
+ref = "twphcebtujedxituqwwr"
+
+[storage]
+bucket = "site-media"
+
+[api]
+url = "https://twphcebtujedxituqwwr.supabase.co"
+
+[db]
+port = 5432

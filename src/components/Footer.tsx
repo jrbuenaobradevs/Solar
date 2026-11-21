@@ -1,7 +1,20 @@
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Logo from "./Logo";
+import { getSiteSettings, type SiteSettings } from "../lib/cms";
 
 function Footer() {
+  const [settings, setSettings] = useState<SiteSettings | null>(null);
+
+  useEffect(() => {
+    getSiteSettings().then(s => setSettings(s)).catch(() => {});
+  }, []);
+
+  const companyName = settings?.companyName ?? "Solar Mechanics";
+  const phone = settings?.phone ?? "+63 917 000 0000";
+  const email = settings?.email ?? "hello@solarmechanics.example";
+  const address = settings?.address ?? "Metro Manila, Philippines";
+
   return (
     <footer>
       <div className="shell footer-grid">
@@ -30,11 +43,11 @@ function Footer() {
         <div>
           <h4>Contact</h4>
           <p>
-            +63 917 000 0000<br />
-            hello@solarmechanics.example<br />
-            Metro Manila, Philippines
+            {phone}<br />
+            {email}<br />
+            {address}
           </p>
-          <small>Placeholder contact details — replace with verified company information.</small>
+          <small>Contact channels and service coverage are subject to confirmation.</small>
         </div>
       </div>
       <div className="shell footer-bottom">

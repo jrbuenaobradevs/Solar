@@ -63,14 +63,13 @@ function QuotePage() {
   if (result) {
     return (
       <div className="page">
-        <PageHero kicker="Quote request" title="Your request is prepared in this browser." text="This prototype does not email Solar Mechanics or save data on a server. Copy your reference if you need it." />
+        <PageHero kicker="Quote request" title="Your request has been submitted." text="We'll review your estimate and get back to you shortly." />
         <section className="section compact">
           <div className="shell">
             <div className="success-card">
               <span><Icon name="check" size={30} /></span>
-              <h2>Local reference created</h2>
+              <h2>Quote request submitted</h2>
               <p>Reference: <strong>{result.reference}</strong> · Status: Pending Review</p>
-              <p>No message was sent. Connect a backend before treating this as a live quotation channel.</p>
               <div className="action-row">
                 <Button to="/">Return Home</Button>
                 <Button variant="secondary" to="/solar-calculator">Run another estimate</Button>
@@ -87,7 +86,7 @@ function QuotePage() {
       <PageHero
         kicker="Get a Solar Quote"
         title="Send your estimate for technical review."
-        text="Your calculator results stay on this form. Submission is stored only in this browser until a backend is connected."
+        text="Your calculator results stay on this form. Submit for review."
       />
       <section className="section">
         <div className="shell contact-grid">
@@ -111,9 +110,6 @@ function QuotePage() {
             ) : (
               <p>No saved calculator results. <Link to="/solar-calculator">Calculate your solar needs</Link> first so we can attach a load list to this request.</p>
             )}
-            <div className="notice top-space">
-              Development-only mock: quotes are not emailed and are not stored in a database.
-            </div>
           </div>
           <form className="contact-form" onSubmit={onSubmit}>
             <Field label="Full name" required><input value={name} onChange={(e) => setName(e.target.value)} required /></Field>

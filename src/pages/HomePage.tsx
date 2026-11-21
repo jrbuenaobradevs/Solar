@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import Button from "../components/Button";
 import ContactCTA from "../components/ContactCTA";
 import FAQSection from "../components/FAQSection";
@@ -8,9 +9,18 @@ import SolarPackageCard from "../components/SolarPackageCard";
 import { solarCalibration } from "../config/solarCalibration";
 import { homeFaqs } from "../data/faqs";
 import { images } from "../data/images";
+import { getCmsPages, type CmsPage } from "../lib/cms";
 
 function HomePage() {
+  const [cms, setCms] = useState<CmsPage | null>(null);
   const featured = solarCalibration.packages.slice(0, 3);
+
+  useEffect(() => {
+    getCmsPages().then(pages => {
+        const homePage = pages.find(p => p.id === 'home');
+        if (homePage) setCms(homePage);
+    });
+  }, []);
 
   return (
     <>
@@ -19,10 +29,9 @@ function HomePage() {
         <div className="shell hero-grid">
           <div className="hero-copy">
             <span className="eyebrow">Solar · Electrical · Training</span>
-            <h1>Powering a Cleaner, <em>Brighter Tomorrow.</em></h1>
+            <h1>{cms?.title ?? <>Powering a Cleaner, <em>Brighter Tomorrow.</em></>}</h1>
             <p>
-              Your partner in solar power solutions, electrical services, and practical solar training.
-              Explore solar systems designed around your energy needs.
+              {cms?.description ?? "Your partner in solar power solutions, electrical services, and practical solar training. Explore solar systems designed around your energy needs."}
             </p>
             <div className="action-row">
               <Button to="/solar-calculator">Calculate Your Solar Needs <Icon name="arrow" size={18} /></Button>
@@ -43,7 +52,7 @@ function HomePage() {
 
       <section className="section">
         <div className="shell">
-          <SectionTitle kicker="What we offer" title="Three service areas. Solar is ready first." text="Solar Solutions is the functional path in this release. Electrical Services and the Solar Training Center are introduced as planned offerings." />
+          <SectionTitle kicker="What we offer" title={cms?.sections[0]?.heading ?? "Three service areas. Solar is ready first."} text={cms?.sections[0]?.body ?? "Solar Solutions is the functional path in this release. Electrical Services and the Solar Training Center are introduced as planned offerings."} />
           <div className="three-grid">
             <ServiceCard
               icon="sun"
@@ -74,7 +83,7 @@ function HomePage() {
 
       <section className="section benefits">
         <div className="shell">
-          <SectionTitle kicker="Why Solar Mechanics" title="Practical energy solutions, sized around your property." text="Every site is different. We start with your loads and usage, then a technical assessment confirms the design before any formal quotation." />
+          <SectionTitle kicker="Why Solar Mechanics" title={cms?.sections[1]?.heading ?? "Practical energy solutions, sized around your property."} text={cms?.sections[1]?.body ?? "Every site is different. We start with your loads and usage, then a technical assessment confirms the design before any formal quotation."} />
           <div className="four-grid">
             {[
               ["bolt", "Lower grid reliance", "Use more of the energy your property produces and reduce exposure to changing utility rates."],
