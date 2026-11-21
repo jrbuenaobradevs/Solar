@@ -12,8 +12,22 @@ export default defineConfig(({ mode }) => {
   // .figma/make/deploy-preview passes `--mode development` for cached-preview builds.
   const emitSourcemaps = mode === 'development'
 
+  // Handle base path for different deployments:
+  // - Figma Make: uses FIGMA_PUBLIC_URL
+  // - Vercel preview: uses VERCEL_URL (e.g., https://project-git-branch.vercel.app)
+  // - Vercel production: base '/'
+  // - Local dev: '/'
+  let base = '/'
+  if (process.env.FIGMA_PUBLIC_URL) {
+    base = `${process.env.FIGMA_PUBLIC_URL}/`
+  } else if (process.env.VERCEL_URL && process.env.VERCEL_GIT_COMMIT_REF !== 'main') {
+    // Vercel preview deployment - extract path from URL
+    // VERCEL_URL format: https://project-git-branch-xxxx.vercel.app
+    base = `/${new URL(process.env.VERCEL_URL).hostname.split('.')[0]}/`
+  }
+
   return {
-    base: process.env.FIGMA_PUBLIC_URL ? `${process.env.FIGMA_PUBLIC_URL}/` : '/',
+    base,
     build: {
       sourcemap: emitSourcemaps ? 'inline' : false,
       minify: !emitSourcemaps,
