@@ -1,5 +1,5 @@
-import Button from "./Button";
-import Icon from "./Icon";
+import Button from "./Button"
+import Icon from "./Icon"
 
 function ContactCTA() {
   return (
@@ -11,11 +11,13 @@ function ContactCTA() {
         </div>
         <div className="action-row">
           <Button to="/solar-calculator">Calculate Your Solar Needs</Button>
-          <Button variant="light" to="/quote">Get a Solar Quote <Icon name="arrow" size={17} /></Button>
+          <Button variant="light" to="/quote">
+            Get a Solar Quote <Icon name="arrow" size={17} />
+          </Button>
         </div>
       </div>
     </section>
-  );
+  )
 }
 
-export default ContactCTA;
+export default ContactCTA

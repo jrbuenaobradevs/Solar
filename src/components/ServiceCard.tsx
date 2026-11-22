@@ -1,6 +1,6 @@
-import { Link } from "react-router-dom";
-import Icon from "./Icon";
-import ServiceStatusBadge from "./ServiceStatusBadge";
+import { Link } from "react-router-dom"
+import Icon from "./Icon"
+import ServiceStatusBadge from "./ServiceStatusBadge"
 
 function ServiceCard({
   icon,
@@ -10,16 +10,18 @@ function ServiceCard({
   cta,
   planned = false,
 }: {
-  icon: string;
-  title: string;
-  description: string;
-  to?: string;
-  cta?: string;
-  planned?: boolean;
+  icon: string
+  title: string
+  description: string
+  to?: string
+  cta?: string
+  planned?: boolean
 }) {
   return (
     <article className="service-card">
-      <span className="icon-box"><Icon name={icon} /></span>
+      <span className="icon-box">
+        <Icon name={icon} />
+      </span>
       {planned && <ServiceStatusBadge />}
       <h3>{title}</h3>
       <p>{description}</p>
@@ -29,7 +31,7 @@ function ServiceCard({
         </Link>
       )}
     </article>
-  );
+  )
 }
 
-export default ServiceCard;
+export default ServiceCard

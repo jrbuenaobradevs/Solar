@@ -1,48 +1,63 @@
-import { useRef, useState, type FormEvent, type ReactNode } from "react";
-import { Link } from "react-router-dom";
-import Button from "../components/Button";
-import Icon from "../components/Icon";
-import PageHero from "../components/PageHero";
-import { solarCalibration } from "../config/solarCalibration";
-import { peso } from "../lib/format";
-import { loadQuoteDraft } from "../lib/quoteDraft";
-import { submitQuote } from "../lib/quoteService";
+import { useRef, useState, type FormEvent, type ReactNode } from "react"
+import { Link } from "react-router-dom"
+import Button from "../components/Button"
+import Icon from "../components/Icon"
+import PageHero from "../components/PageHero"
+import { solarCalibration } from "../config/solarCalibration"
+import { peso } from "../lib/format"
+import { loadQuoteDraft } from "../lib/quoteDraft"
+import { submitQuote } from "../lib/quoteService"
 
-function Field({ label, children, required, wide }: { label: string; children: ReactNode; required?: boolean; wide?: boolean }) {
+function Field({
+  label,
+  children,
+  required,
+  wide,
+}: {
+  label: string
+  children: ReactNode
+  required?: boolean
+  wide?: boolean
+}) {
   return (
     <label className={`field ${wide ? "wide" : ""}`}>
-      <span>{label}{required && <b> *</b>}</span>
+      <span>
+        {label}
+        {required && <b> *</b>}
+      </span>
       {children}
     </label>
-  );
+  )
 }
 
 function QuotePage() {
-  const draft = loadQuoteDraft();
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
-  const [address, setAddress] = useState("");
-  const [extraNotes, setExtraNotes] = useState(draft?.notes ?? "");
-  const [error, setError] = useState("");
-  const [busy, setBusy] = useState(false);
-  const [result, setResult] = useState<{ reference: string } | null>(null);
-  const submitted = useRef(false);
+  const draft = loadQuoteDraft()
+  const [name, setName] = useState("")
+  const [email, setEmail] = useState("")
+  const [phone, setPhone] = useState("")
+  const [address, setAddress] = useState("")
+  const [extraNotes, setExtraNotes] = useState(draft?.notes ?? "")
+  const [error, setError] = useState("")
+  const [busy, setBusy] = useState(false)
+  const [result, setResult] = useState<{ reference: string } | null>(null)
+  const submitted = useRef(false)
 
   const onSubmit = async (event: FormEvent) => {
-    event.preventDefault();
-    setError("");
-    if (submitted.current || busy) return;
+    event.preventDefault()
+    setError("")
+    if (submitted.current || busy) return
     if (!name.trim() || !email.trim() || !phone.trim()) {
-      setError("Name, email, and contact number are required.");
-      return;
+      setError("Name, email, and contact number are required.")
+      return
     }
     if (!draft) {
-      setError("No calculator results were found. Please complete the solar calculator first, or continue with contact-only details from the Contact page.");
-      return;
+      setError(
+        "No calculator results were found. Please complete the solar calculator first, or continue with contact-only details from the Contact page.",
+      )
+      return
     }
-    setBusy(true);
-    submitted.current = true;
+    setBusy(true)
+    submitted.current = true
     const response = await submitQuote({
       ...draft,
       name: name.trim(),
@@ -50,35 +65,46 @@ function QuotePage() {
       phone: phone.trim(),
       address: address.trim(),
       extraNotes: extraNotes.trim(),
-    });
-    setBusy(false);
+    })
+    setBusy(false)
     if (!response.ok) {
-      submitted.current = false;
-      setError(response.error);
-      return;
+      submitted.current = false
+      setError(response.error)
+      return
     }
-    setResult({ reference: response.reference });
-  };
+    setResult({ reference: response.reference })
+  }
 
   if (result) {
     return (
       <div className="page">
-        <PageHero kicker="Quote request" title="Your request has been submitted." text="We'll review your estimate and get back to you shortly." />
+        <PageHero
+          kicker="Quote request"
+          title="Your request has been submitted."
+          text="We'll review your estimate and get back to you shortly."
+        />
         <section className="section compact">
           <div className="shell">
             <div className="success-card">
-              <span><Icon name="check" size={30} /></span>
+              <span>
+                <Icon name="check" size={30} />
+              </span>
               <h2>Quote request submitted</h2>
-              <p>Reference: <strong>{result.reference}</strong> · Status: Pending Review</p>
+              <p>
+                Reference: <strong>{result.reference}</strong> · Status: Pending
+                Review
+              </p>
               <div className="action-row">
                 <Button to="/">Return Home</Button>
-                <Button variant="secondary" to="/solar-calculator">Run another estimate</Button>
+                <Button variant="secondary" to="/solar-calculator">
+                  Run another estimate
+                </Button>
               </div>
             </div>
           </div>
         </section>
       </div>
-    );
+    )
   }
 
   return (
@@ -97,34 +123,85 @@ function QuotePage() {
                 <div>
                   <h3>Property</h3>
                   <p>{draft.propertyType}</p>
-                  <p>{draft.city}, {draft.province}</p>
+                  <p>
+                    {draft.city}, {draft.province}
+                  </p>
                   <p>{draft.appliances.length} appliances</p>
                 </div>
                 <div>
                   <h3>Preliminary sizing</h3>
                   <p>{draft.estimate.dailyKwh.toFixed(1)} kWh/day</p>
-                  <p>{draft.estimate.solarKwp} kWp {draft.estimate.recommendedType}</p>
-                  {solarCalibration.showIllustrativePricing && <p>{peso(draft.estimate.total)} illustrative</p>}
+                  <p>
+                    {draft.estimate.solarKwp} kWp{" "}
+                    {draft.estimate.recommendedType}
+                  </p>
+                  {solarCalibration.showIllustrativePricing && (
+                    <p>{peso(draft.estimate.total)} illustrative</p>
+                  )}
                 </div>
               </div>
             ) : (
-              <p>No saved calculator results. <Link to="/solar-calculator">Calculate your solar needs</Link> first so we can attach a load list to this request.</p>
+              <p>
+                No saved calculator results.{" "}
+                <Link to="/solar-calculator">Calculate your solar needs</Link>{" "}
+                first so we can attach a load list to this request.
+              </p>
             )}
           </div>
           <form className="contact-form" onSubmit={onSubmit}>
-            <Field label="Full name" required><input value={name} onChange={(e) => setName(e.target.value)} required /></Field>
-            <Field label="Email address" required><input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required /></Field>
-            <Field label="Contact number" required><input type="tel" value={phone} onChange={(e) => setPhone(e.target.value)} required /></Field>
-            <Field label="Installation address" wide><textarea rows={3} value={address} onChange={(e) => setAddress(e.target.value)} /></Field>
-            <Field label="Additional requirements" wide><textarea rows={3} value={extraNotes} onChange={(e) => setExtraNotes(e.target.value)} /></Field>
-            {error && <p className="field-help" role="alert">{error}</p>}
-            <Button type="submit" disabled={busy || !draft}>{busy ? "Submitting…" : "Submit quote request"}</Button>
-            {!draft && <small>Complete the calculator to enable submission.</small>}
+            <Field label="Full name" required>
+              <input
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                required
+              />
+            </Field>
+            <Field label="Email address" required>
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
+            </Field>
+            <Field label="Contact number" required>
+              <input
+                type="tel"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+                required
+              />
+            </Field>
+            <Field label="Installation address" wide>
+              <textarea
+                rows={3}
+                value={address}
+                onChange={(e) => setAddress(e.target.value)}
+              />
+            </Field>
+            <Field label="Additional requirements" wide>
+              <textarea
+                rows={3}
+                value={extraNotes}
+                onChange={(e) => setExtraNotes(e.target.value)}
+              />
+            </Field>
+            {error && (
+              <p className="field-help" role="alert">
+                {error}
+              </p>
+            )}
+            <Button type="submit" disabled={busy || !draft}>
+              {busy ? "Submitting…" : "Submit quote request"}
+            </Button>
+            {!draft && (
+              <small>Complete the calculator to enable submission.</small>
+            )}
           </form>
         </div>
       </section>
     </div>
-  );
+  )
 }
 
-export default QuotePage;
+export default QuotePage

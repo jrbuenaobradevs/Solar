@@ -1,13 +1,13 @@
-import { useEffect } from "react";
-import { Outlet, useLocation } from "react-router-dom";
-import Footer from "./Footer";
-import Navbar from "./Navbar";
+import { useEffect } from "react"
+import { Outlet, useLocation } from "react-router-dom"
+import Footer from "./Footer"
+import Navbar from "./Navbar"
 
 function Layout() {
-  const { pathname } = useLocation();
+  const { pathname } = useLocation()
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  }, [pathname]);
+    window.scrollTo({ top: 0, behavior: "smooth" })
+  }, [pathname])
 
   return (
     <>
@@ -15,7 +15,7 @@ function Layout() {
       <Outlet />
       <Footer />
     </>
-  );
+  )
 }
 
-export default Layout;
+export default Layout

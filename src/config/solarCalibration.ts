@@ -63,9 +63,27 @@ export const solarCalibration = {
    * (and battery, when backup is requested).
    */
   coverageTiers: [
-    { id: "lean", label: "Lean", solarMultiplier: 0.8, batteryMultiplier: 0.7, coveragePercent: 65 },
-    { id: "balanced", label: "Balanced", solarMultiplier: 1, batteryMultiplier: 1, coveragePercent: 82 },
-    { id: "high", label: "High coverage", solarMultiplier: 1.25, batteryMultiplier: 1.3, coveragePercent: 95 },
+    {
+      id: "lean",
+      label: "Lean",
+      solarMultiplier: 0.8,
+      batteryMultiplier: 0.7,
+      coveragePercent: 65,
+    },
+    {
+      id: "balanced",
+      label: "Balanced",
+      solarMultiplier: 1,
+      batteryMultiplier: 1,
+      coveragePercent: 82,
+    },
+    {
+      id: "high",
+      label: "High coverage",
+      solarMultiplier: 1.25,
+      batteryMultiplier: 1.3,
+      coveragePercent: 95,
+    },
   ] as const,
 
   /**
@@ -265,7 +283,8 @@ export const solarCalibration = {
       name: "Extra Battery Module",
       icon: "battery",
       spec: "314–330AH 51.2V LiFePO4 | brands: SRNE, Genix, Menred, CST, Fidus, Ginza",
-      description: "Add storage for heavier nighttime use, from ₱110,000 (314AH) up to ₱125,000 (Ginza 330AH).",
+      description:
+        "Add storage for heavier nighttime use, from ₱110,000 (314AH) up to ₱125,000 (Ginza 330AH).",
       price: 110000,
       priceMax: 125000,
       priceIsFrom: true,
@@ -283,10 +302,10 @@ export const solarCalibration = {
 
   disclaimer:
     "Preliminary estimate only. Final design, equipment, and price require a technical site assessment. Solar yield varies with weather, orientation, shading, soiling, and equipment. Backup runtime is not guaranteed.",
-} as const;
+} as const
 
-export type SolarCalibration = typeof solarCalibration;
-export type SystemType = "Hybrid" | "On-Grid" | "Off-Grid";
-export type CoverageTierId = (typeof solarCalibration.coverageTiers)[number]["id"];
-export type SolarPackage = (typeof solarCalibration.packages)[number];
-export type SolarAddon = (typeof solarCalibration.addons)[number];
+export type SolarCalibration = typeof solarCalibration
+export type SystemType = "Hybrid" | "On-Grid" | "Off-Grid"
+export type CoverageTierId = typeof solarCalibration.coverageTiers[number]["id"]
+export type SolarPackage = typeof solarCalibration.packages[number]
+export type SolarAddon = typeof solarCalibration.addons[number]

@@ -1,4 +1,12 @@
-function PageHero({ kicker, title, text }: { kicker: string; title: string; text: string }) {
+function PageHero({
+  kicker,
+  title,
+  text,
+}: {
+  kicker: string
+  title: string
+  text: string
+}) {
   return (
     <section className="page-hero">
       <div className="shell">
@@ -7,7 +15,7 @@ function PageHero({ kicker, title, text }: { kicker: string; title: string; text
         <p>{text}</p>
       </div>
     </section>
-  );
+  )
 }
 
-export default PageHero;
+export default PageHero

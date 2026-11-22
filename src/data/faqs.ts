@@ -15,7 +15,7 @@ export const homeFaqs = [
     q: "Are Electrical Services and the Training Center open for booking?",
     a: "Those pages describe planned offerings. Use Contact Us to register interest. Booking, checkout, and course enrollment are not available in this release.",
   },
-];
+]
 
 export const solarFaqs = [
   {
@@ -30,4 +30,4 @@ export const solarFaqs = [
     q: "Will this estimate match my electricity bill?",
     a: "Not necessarily. Connected load and assumed hours are not the same as metered consumption. Duty cycle, efficiency, and usage patterns all affect the bill.",
   },
-];
+]

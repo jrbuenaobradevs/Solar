@@ -3,10 +3,10 @@ export function peso(value: number) {
     style: "currency",
     currency: "PHP",
     maximumFractionDigits: 0,
-  }).format(value);
+  }).format(value)
 }
 
 export function roundTo(value: number, places: number) {
-  const factor = 10 ** places;
-  return Math.round(value * factor) / factor;
+  const factor = 10 ** places
+  return Math.round(value * factor) / factor
 }

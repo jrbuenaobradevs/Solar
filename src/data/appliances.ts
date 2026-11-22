@@ -10,4 +10,4 @@ export const applianceCatalog = [
   { name: "Water pump", watts: 750, hours: 2 },
   { name: "Rice cooker", watts: 700, hours: 1 },
   { name: "Other custom appliance", watts: 100, hours: 1 },
-] as const;
+] as const

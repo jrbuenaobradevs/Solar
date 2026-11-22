@@ -16,7 +16,7 @@ function FAQSection({ items }: { items: { q: string; a: string }[] }) {
         </div>
       </div>
     </section>
-  );
+  )
 }
 
-export default FAQSection;
+export default FAQSection

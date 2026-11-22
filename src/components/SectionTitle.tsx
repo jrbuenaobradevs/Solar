@@ -4,10 +4,10 @@ function SectionTitle({
   text,
   centered = false,
 }: {
-  kicker: string;
-  title: string;
-  text?: string;
-  centered?: boolean;
+  kicker: string
+  title: string
+  text?: string
+  centered?: boolean
 }) {
   return (
     <div className={`section-title ${centered ? "centered" : ""}`}>
@@ -15,7 +15,7 @@ function SectionTitle({
       <h2>{title}</h2>
       {text && <p>{text}</p>}
     </div>
-  );
+  )
 }
 
-export default SectionTitle;
+export default SectionTitle
